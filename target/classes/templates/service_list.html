@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Services</title>
+</head>
+<body>
+<a th:href="@{'/dashboard/v1/envs'}" title="Вернуться на экран выбора среды"> На главный экран</a>
+<br><a href="javascript:history.back()" title="Вернуться на предыдущую страницу"> Назад </a>
+<h1 th:text="${env}"></h1>
+
+<form method="post">
+    <input autocomplete="off" autofocus name="filter" type="text">
+    <button type="submit">Найти</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th> InTo</th>
+        <th> Service Name</th>
+        <th> Healthy</th>
+        <th> ΔMaster</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${serviceList.isEmpty()}">
+        <td colspan="2"> No Microservices Available</td>
+    </tr>
+
+    <tr th:each="service : ${serviceList}">
+        <td>
+            <form th:action="@{'/dashboard/v1/'+ ${env} +'/'+${service.getServiceName()}}" method="get">
+                <button th:id="into" type="submit">🔍</button>
+            </form>
+        </td>
+        <td><span th:text="${service.getServiceName()}"> Service Name</span></td>
+        <td><span th:text="${service.getHealth()}"> Healthy</span></td>
+        <td><span th:text="${service.getDeltaM()}"> ΔMaster</span></td>
+    </tr>
+
+    </tbody>
+</table>
+</body>
+</html>

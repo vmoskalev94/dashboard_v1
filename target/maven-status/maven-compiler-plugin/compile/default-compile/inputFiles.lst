@@ -1,0 +1,11 @@
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\client\CacheService.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\config\AppConfiguration.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\dao\repository\MicroserviceRepo.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\web\DashboardController.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\schedulers\AutomaticCheckHealth.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\dao\entity\Microservice.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\dao\service\impl\MicroserviceDaoService.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\Application.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\config\RedisConfiguration.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\handler\RestTemplateResponseErrorHandler.java
+C:\Users\Владислав\IdeaProjects\service-dashboard\src\main\java\ru\homecredit\microservice\dao\service\IMicroserviceDaoService.java
