@@ -44,31 +44,44 @@ public class AutomaticCheckHealth {
         return response;
     }
 
+    /**
+     * Порядок действий:
+     * нахходим все ключи из редиски
+     * если там не пусто
+     * преобразуем множество из ключей в лист
+     * разделяем ключ на массивы
+     * берем только то что нам нужно из ключа и суем в список
+     * если прошел час
+     * берем ответ по ключу
+     * и сохраняем в файл
+     * и удаляем эту запись из кеша
+     * если час не прошел то обновляем кеш по ключу
+     */
     //todo добавить время бекапа?
     @Scheduled(cron = "0 */10 * * * ?")
     public void refreshCache() {
-        Set<String> redisKeys = redisTemplate.keys("*");                                                                    // нахходим все ключи из редиски
-        if (redisKeys != null && !redisKeys.isEmpty()) {                                                                            // если там не пусто
-            List<String> keysList = new ArrayList<>((redisKeys));                                                                   // преобразуем множество из ключей в лист
+        Set<String> redisKeys = redisTemplate.keys("*");
+        if (redisKeys != null && !redisKeys.isEmpty()) {
+            List<String> keysList = new ArrayList<>((redisKeys));
 
             for (String s : keysList) {
-                String[] split = s.split("[:/]");                                                                             // разделяем ключ на массивы
+                String[] split = s.split("[:/]");
 
-                List<String> cacheList = new ArrayList<>(Arrays.asList(split).subList(2, split.length));                             //берем только то что нам нужно из ключа и суем в список
+                List<String> cacheList = new ArrayList<>(Arrays.asList(split).subList(2, split.length));
 
-                if (i % 6 == 0) {                                                                                                  // если прошел час
+                if (i % 6 == 0) {
                     log.info("Saving to file...");
-                    String cache = getRequestFromCache(cacheList.get(0), cacheList.get(1), cacheList.get(2));                        // берем ответ по ключу
+                    String cache = getRequestFromCache(cacheList.get(0), cacheList.get(1), cacheList.get(2));
 
                     File file = new File("src/main/resources/dump.txt");
                     try (FileWriter fr = new FileWriter(file, true)) {
-                        fr.write((cacheList.get(0) + " " + cacheList.get(1) + " " + cacheList.get(2) + ":" + cache + "\n"));         // и сохраняем в файл
+                        fr.write((cacheList.get(0) + " " + cacheList.get(1) + " " + cacheList.get(2) + ":" + cache + "\n"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cacheService.cleanCacheByKey(cacheList.get(0) + ":" + cacheList.get(1) + "/" + cacheList.get(2));           // и удаляем эту запись из кеша
+                    cacheService.cleanCacheByKey(cacheList.get(0) + ":" + cacheList.get(1) + "/" + cacheList.get(2));
                 } else {
-                    cacheService.populateCache(cacheList.get(0), cacheList.get(1), cacheList.get(2));                                 // если час не прошел то обновляем кеш по ключу
+                    cacheService.populateCache(cacheList.get(0), cacheList.get(1), cacheList.get(2));
                 }
 
             }

@@ -23,7 +23,7 @@ public class DashboardController {
         List<String> list;
         if (envFilter != null && !envFilter.isEmpty()) {
             list = microserviceDaoService.getDistinctEnvDescs().stream()
-                    // в слове из поиска заменяем пробелы на +, шобы искалось хорошо
+                    // change all spaces to '+', for searching
                     .filter(m -> m.toLowerCase().contains(envFilter.toLowerCase().replaceAll("\\s+", "+")))
                     .collect(Collectors.toList());
         } else {

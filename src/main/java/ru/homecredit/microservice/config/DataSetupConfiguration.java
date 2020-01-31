@@ -56,6 +56,7 @@ public class DataSetupConfiguration {
                 Node anon = anonElements.item(i);
                 NamedNodeMap attributes = anon.getAttributes();
                 microserviceRepo.save(new Microservice(
+                        // change all spaces to '+' and delete all brackets
                         attributes.getNamedItem("e_desc").getNodeValue().replaceAll("\\s+", "+").replaceAll("[()<\\[\\]>]", ""),
                         attributes.getNamedItem("e_name").getNodeValue(),
                         attributes.getNamedItem("se_name").getNodeValue(),

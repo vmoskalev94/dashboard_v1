@@ -24,8 +24,9 @@ public class MicroserviceDaoService implements IMicroserviceDaoService {
     @Override
     @Transactional(readOnly = true)
     public Stream<Microservice> getAllMicroservices() {
-//        это не надо
-//        return microserviceRepo.findAllToStream();
+        //todo
+        // это не надо
+        // return microserviceRepo.findAllToStream();
         Iterable<Microservice> all = microserviceRepo.findAll();
         return StreamSupport.stream(all.spliterator(), false);
     }
@@ -42,8 +43,9 @@ public class MicroserviceDaoService implements IMicroserviceDaoService {
     @Override
     @Transactional(readOnly = true)
     public List<Microservice> getServicesByEnvDesc(String env) {
-//        это не надо
-//        return microserviceRepo.getByEnvDesc(env);
+        //todo
+        // это не надо
+        // return microserviceRepo.getByEnvDesc(env);
         return microserviceRepo.findByEnvDesc(env);
     }
 

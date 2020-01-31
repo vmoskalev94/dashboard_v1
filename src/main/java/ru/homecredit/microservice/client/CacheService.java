@@ -35,7 +35,6 @@ public class CacheService {
         log.info("{} {} {}", env, service, method);
         String s = restTemplate.getForObject(URL, String.class, env, service, method);
         return s.replaceAll("\\s+", "");
-//        return "Закурячили : " + env + " " + service + " " + method;
     }
 
     @CacheEvict(value = "SERVICE", key = "#key")
