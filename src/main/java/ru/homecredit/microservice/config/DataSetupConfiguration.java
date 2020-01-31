@@ -1,5 +1,6 @@
 package ru.homecredit.microservice.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -19,6 +20,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
+@Slf4j
 @Configuration
 public class DataSetupConfiguration {
     @Value("${dashboard.xml_export_url}")
@@ -68,8 +70,10 @@ public class DataSetupConfiguration {
                         attributes.getNamedItem("volumes").getNodeValue()
                 ));
             }
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            log.error("javax.xml.parsers.DocumentBuilder cannot be created which satisfies the configuration requested");
+        } catch (SAXException | IOException e) {
+            log.error("XML parser error");
         }
     }
 }
