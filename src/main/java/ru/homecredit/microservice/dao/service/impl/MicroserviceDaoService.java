@@ -14,6 +14,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +24,10 @@ public class MicroserviceDaoService implements IMicroserviceDaoService {
     @Override
     @Transactional(readOnly = true)
     public Stream<Microservice> getAllMicroservices() {
-        return microserviceRepo.findAllToStream();
+//        это не надо
+//        return microserviceRepo.findAllToStream();
+        Iterable<Microservice> all = microserviceRepo.findAll();
+        return StreamSupport.stream(all.spliterator(), false);
     }
 
     @Override
@@ -38,7 +42,9 @@ public class MicroserviceDaoService implements IMicroserviceDaoService {
     @Override
     @Transactional(readOnly = true)
     public List<Microservice> getServicesByEnvDesc(String env) {
-        return microserviceRepo.getByEnvDesc(env);
+//        это не надо
+//        return microserviceRepo.getByEnvDesc(env);
+        return microserviceRepo.findByEnvDesc(env);
     }
 
     private <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
