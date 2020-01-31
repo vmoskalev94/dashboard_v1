@@ -3,11 +3,8 @@ package ru.homecredit.microservice.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.support.BasicAuthenticationInterceptor;
-import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -23,24 +20,11 @@ import java.io.File;
 import java.io.IOException;
 
 @Configuration
-public class AppConfiguration {
+public class DataSetupConfiguration {
     @Value("${dashboard.xml_export_url}")
     private String xmlExportUrl;
     @Value("${dashboard.xml_saved_file}")
     private String xmlSavedFile;
-    @Value("${omni.username}")
-    private String username;
-    @Value("${omni.password}")
-    private String password;
-
-
-    @Bean
-    public RestTemplate restTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(new BasicAuthenticationInterceptor(username, password));
-//        restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
-        return restTemplate;
-    }
 
     // todo
     //  1. e_desc брать в форматированном виде, так как хтмл ругается на пробелы и скобки!
